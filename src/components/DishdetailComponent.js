@@ -17,17 +17,22 @@ class DishDetail extends Component {
 
     renderComments(dish) {
         const comments = dish.comments.map((comment) => {
+
+            const date = new Date(comment.date)
+            const monthArray = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            const formattedDate = `${monthArray[date.getMonth()]} ${("0" + date.getDate()).slice(-2)}, ${date.getFullYear()}`
+
             return (
-                <ul key={comment.id} className="list-unstyled">
-                    <li>{comment.comment}</li>
-                    <li>-- {comment.author} {comment.date}</li>
-                </ul>
+                <li key={comment.id}>
+                    <p>{comment.comment}</p>
+                    <p>-- {comment.author}, {formattedDate}</p>
+                </li>
             );
         });
         return (
-            <div>
+            <ul className="list-unstyled">
                 {comments}
-            </div>
+            </ul>
         );
     }
 
