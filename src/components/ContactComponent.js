@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Breadcrumb, BreadcrumbItem, Button, FormGroup, Label, Input, Col } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 class Contact extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -56,6 +56,80 @@ class Contact extends Component {
                             <a role="button" className="btn btn-info"><i className="fa fa-skype"></i> Skype</a>
                             <a role="button" className="btn btn-success" href="mailto:confusion@food.net"><i className="fa fa-envelope-o"></i> Email</a>
                         </div>
+                    </div>
+                </div>
+                <div className='row row-container'>
+                    <div className='col-12'>
+                        <h3>Send us your Feedback</h3>
+                    </div>
+                    <div className='col-12 col-md-9'>
+                        <Form>
+                            <FormGroup row>
+                                <Label htmlFor='firstname' md={2}>First Name</Label>
+                                <Col md={10}>
+                                    <Input type='text' id='firstname' name='firstname'
+                                        placeholder='First Name'
+                                        value={this.state.firstname} />
+                                </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                                <Label htmlFor='lastname' md={2}>Last Name</Label>
+                                <Col md={10}>
+                                    <Input type='text' id='lastname' name='lastname'
+                                        placeholder='Last Name'
+                                        value={this.state.lastname} />
+                                </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                                <Label htmlFor='telnum' md={2}>Contact Tel.</Label>
+                                <Col md={10}>
+                                    <Input type='tel' id='telnum' name='telnum'
+                                        placeholder='Tel. Number'
+                                        value={this.state.telnum} />
+                                </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                                <Label htmlFor='email' md={2}>Email</Label>
+                                <Col md={10}>
+                                    <Input type='email' id='email' name='email'
+                                        placeholder='Email'
+                                        value={this.state.email} />
+                                </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                                <Col md={{ size: 6, offset: 2 }}>
+                                    <FormGroup check>
+                                        <Label check>
+                                            <Input type="checkbox" name="agree"
+                                                checked={this.state.agree} /> {' '}
+                                            <strong>May we contact you?</strong>
+                                        </Label>
+                                    </FormGroup>
+                                </Col>
+                                <Col md={{ size: 3, offset: 1 }}>
+                                    <Input type="select" name="contactType"
+                                        value={this.state.contactType}>
+                                        <option>Tel.</option>
+                                        <option>Email</option>
+                                    </Input>
+                                </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                                <Label htmlFor='message' md={2}>Your Feedback</Label>
+                                <Col md={10}>
+                                    <Input type='textarea' id='message' name='message'
+                                        rows="12"
+                                        value={this.state.message} />
+                                </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                                <Col md={{ size: 10, offset: 2 }}>
+                                    <Button type="submit" color="primary">
+                                        Send Feedback
+                                    </Button>
+                                </Col>
+                            </FormGroup>
+                        </Form>
                     </div>
                 </div>
             </div>
