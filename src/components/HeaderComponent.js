@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
     Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron,
-    Button, Modal, ModalHeader, ModalBody
+    Button, Modal, ModalHeader, ModalBody,
+    Form, FormGroup, Input, Label
 } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 
@@ -15,6 +16,7 @@ class Header extends Component {
         }
         this.toggleNav = this.toggleNav.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
+        this.handleLogin = this.handleLogin.bind(this);
     }
 
     toggleNav() {
@@ -27,6 +29,13 @@ class Header extends Component {
         this.setState({
             isModalOpen: !this.state.isModalOpen
         });
+    }
+
+    handleLogin(event) {
+        this.toggleModal();
+        alert("Username: " + this.username.value + " Password: " + this.username.value
+            + " Remember: " + this.username.checked);
+        event.preventDefault();
     }
 
     render() {
@@ -84,7 +93,25 @@ class Header extends Component {
                 </Jumbotron>
                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                     <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
-                    <ModalBody></ModalBody>
+                    <ModalBody>
+                        <Form onSubmit={this.handleLogin}>
+                            <FormGroup>
+                                <Label htmlFor="username">Username</Label>
+                                <Input type="text" id="username" name="username" />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label htmlFor="password">Password</Label>
+                                <Input type="password" id="password" name="password" />
+                            </FormGroup>
+                            <FormGroup check>
+                                <Label check>
+                                    <Input type="checkbox" name="remember" />
+                                    Remember me
+                            </Label>
+                            </FormGroup>
+                            <Button type="submit" value="submit" className="primary">Login</Button>
+                        </Form>
+                    </ModalBody>
                 </Modal>
             </React.Fragment>
         );
