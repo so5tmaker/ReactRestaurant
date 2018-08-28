@@ -9,6 +9,7 @@ import Footer from './FooterComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addComment, fetchDishes } from '../redux/ActionCreators';
+import {actions} from 'react-redux-form';
 
 const mapDispatchToProps = dispatch => ({
 
