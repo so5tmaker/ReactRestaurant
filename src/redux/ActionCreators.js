@@ -33,11 +33,11 @@ export const addDishes = (dishes) => ({
     payload: dishes
 });
 
-export const fetchComments = () => (dispatch) => {
+export const fetchComments = () => (dispatch) => {    
     return fetch(baseUrl + 'comments')
-        .then(response => response.json())
-        .then(comments => dispatch(addComments(comments)));
-}
+    .then(response => response.json())
+    .then(comments => dispatch(addComments(comments)));
+};
 
 export const commentsFailed = (errmess) => ({
     type: ActionTypes.COMMENTS_FAILED,
@@ -50,11 +50,12 @@ export const addComments = (comments) => ({
 });
 
 export const fetchPromos = () => (dispatch) => {
-    dispatch(promosLoading(true));
+    
+    dispatch(promosLoading());
 
     return fetch(baseUrl + 'promotions')
-        .then(response => response.json())
-        .then(promos => dispatch(addDishes(promos)));
+    .then(response => response.json())
+    .then(promos => dispatch(addPromos(promos)));
 }
 
 export const promosLoading = () => ({
