@@ -184,22 +184,14 @@ export const addFeedbacks = (feedbacks) => ({
     payload: feedbacks
 });
 
-export const postFeedback = (firstname, lastname, telnum, email, agree, contactType, message) => (dispatch) => {
+export const postFeedback = (feedback) => (dispatch) => {
 
-    const newFeedback = {
-        firstname: firstname,
-        lastname: lastname,
-        telnum: telnum,
-        email: email,
-        agree: agree,
-        contactType: contactType,
-        message: message
-    };
-    newFeedback.date = new Date().toISOString();
+    feedback = { ...feedback }
+    feedback.date = new Date().toISOString();
 
     return fetch(baseUrl + 'feedback', {
         method: "POST",
-        body: JSON.stringify(newFeedback),
+        body: JSON.stringify(feedback),
         headers: {
             "Content-Type": "application/json"
         },
