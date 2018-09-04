@@ -1,14 +1,32 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
-function RenderLeader({ leader }) {
-    if (leader != null) {
+function RenderLeader({ leader, props }) {
+    if (props.isLoading) {
+        return (
+            <div className='container'>
+                <div className='row'>
+                    <Loading />
+                </div>
+            </div>
+        );
+    } else if (props.errMess) {
+        return (
+            <div className='container'>
+                <div className='row'>
+                    <h4>{props.errMess}</h4>
+                </div>
+            </div>
+        );
+    } else if (leader != null) {
         return (
             <div key={leader.id} className="col-12 mt-5">
                 <Media tag="li">
                     <Media left middle>
-                        <Media object src={leader.image} alt={leader.name} />
+                        <Media object src={baseUrl + leader.image} alt={leader.name} />
                     </Media>
                     <Media body className="ml-5">
                         <Media heading>{leader.name}</Media>
@@ -18,14 +36,17 @@ function RenderLeader({ leader }) {
                 </Media>
             </div>
         );
-    }
+    } else
+        return (
+            <div></div>
+        );
 }
 
 function About(props) {
 
-    const leaders = props.leaders.map((leader) => {
+    const leaders = props.leaders.leaders.map((leader) => {
         return (
-            <RenderLeader leader={leader} />
+            <RenderLeader leader={leader} props={props} />
         );
     });
 
