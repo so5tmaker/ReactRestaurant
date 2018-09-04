@@ -3,9 +3,10 @@ import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'r
 import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import { Fade, Stagger } from 'react-animation-components';
 
-function RenderLeader({ leader, props }) {
-    if (props.isLoading) {
+function RenderLeader({ leader, props, isLoading }) {
+    if (props.leaders.isLoading) {
         return (
             <div className='container'>
                 <div className='row'>
@@ -24,16 +25,18 @@ function RenderLeader({ leader, props }) {
     } else if (leader != null) {
         return (
             <div key={leader.id} className="col-12 mt-5">
-                <Media tag="li">
-                    <Media left middle>
-                        <Media object src={baseUrl + leader.image} alt={leader.name} />
+                <Fade in>
+                    <Media tag="li">
+                        <Media left middle>
+                            <Media object src={baseUrl + leader.image} alt={leader.name} />
+                        </Media>
+                        <Media body className="ml-5">
+                            <Media heading>{leader.name}</Media>
+                            <p>{leader.designation}</p>
+                            <p>{leader.description}</p>
+                        </Media>
                     </Media>
-                    <Media body className="ml-5">
-                        <Media heading>{leader.name}</Media>
-                        <p>{leader.designation}</p>
-                        <p>{leader.description}</p>
-                    </Media>
-                </Media>
+                </Fade>
             </div>
         );
     } else
@@ -46,7 +49,9 @@ function About(props) {
 
     const leaders = props.leaders.leaders.map((leader) => {
         return (
-            <RenderLeader leader={leader} props={props} />
+            <Stagger in>
+                <RenderLeader leader={leader} props={props} isLoading={props.leadersLoading}/>
+            </Stagger>
         );
     });
 
