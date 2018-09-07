@@ -4,6 +4,7 @@ import './App.css';
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux';
 import { ConfigureStore } from './redux/configureStore';
+import { Navbar, NavbarBrand } from 'reactstrap';
 
 const store = ConfigureStore();
 
